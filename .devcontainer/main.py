@@ -3,7 +3,7 @@ import threading
 # import "packages" from flask
 from flask import render_template,request  # import render_template from "public" flask libraries
 from flask.cli import AppGroup
-
+from flask_cors import CORS
 
 # import "packages" from "this" project
 from __init__ import app, db, cors  # Definitions initialization
@@ -32,6 +32,7 @@ app.register_blueprint(user_api) # register api routes
 app.register_blueprint(player_api)
 app.register_blueprint(app_projects) # register app pages
 
+
 @app.errorhandler(404)  # catch for URL not found
 def page_not_found(e):
     # note that we set the 404 status explicitly
@@ -49,7 +50,8 @@ def table():
 def before_request():
     # Check if the request came from a specific origin
     allowed_origin = request.headers.get('Origin')
-    if allowed_origin in ['http://localhost:4100', 'http://127.0.0.1:4100', 'https://nighthawkcoders.github.io']:
+
+    if allowed_origin in ['https://drishyamody.github.io/DJAKTri2/','http://localhost:4200/','http://localhost:4200','http://localhost:4100', 'http://127.0.0.1:4200', 'http://127.0.0.1:4100', 'https://nighthawkcoders.github.io']:
         cors._origins = allowed_origin
 
 # Create an AppGroup for custom commands
@@ -67,4 +69,4 @@ app.cli.add_command(custom_cli)
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
-    app.run(debug=True, host="0.0.0.0", port="8084")
+    app.run(debug=True, host="0.0.0.0", port="8085")
